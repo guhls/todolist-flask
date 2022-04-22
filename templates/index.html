@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{%endblock%}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="text-center">Simple TODO list with flask</h1>
+
+        <form action="/add" method="POST">
+            <div class="form-group">
+                <label for="title">Todo title</label>
+                <input type="text" id="title" name="title" placeholder="Enter name todo...">
+            </div>
+            <button class="btn btn-primary" type="submit">Criar</button>
+        </form>
+    </div>
+
+    <div>
+        {% for todo in todo_list: %}
+            <div class="card-body">
+                <div class="card-title">
+                    <h1>{{todo.title}}</h1>
+                </div>
+                <div class="card-text">
+                    {% if todo.complete: %}
+                        <span>Completed</span>
+                    {% else: %}
+                        <span>Not Completed</span>
+                    {%endif%}
+
+                    <div>
+                        <a class="btn btn-primary" href="/update/{{todo.id}}">update</a>
+                        <a class="btn btn-primary" href="/delete/{{todo.id}}">delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
